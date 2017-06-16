@@ -618,15 +618,17 @@ export default {
         return false
       }
 
+      if (typeof this.highlighted === 'undefined') {
+        return false
+      }
+
       let highlightedDate = {
         isHighlighted: false,
         highlightedClass: '',
         disabled: false
       }
 
-      if (typeof this.highlighted === 'undefined') {
-        return false
-      }
+      console.log()
 
       if (!Array.isArray(this.highlighted)) {
         highlightedDate = this.checkHighlightedDate(this.highlighted, date)
@@ -652,7 +654,7 @@ export default {
       let highlightedDate = {
         isHighlighted: false,
         highlightedClass: highlightClass,
-        disabled: highlightDisabled
+        disabled: false
       }
 
       if (typeof highlight.dates !== 'undefined') {
@@ -670,6 +672,10 @@ export default {
 
       if (typeof highlight.days !== 'undefined' && highlight.days.indexOf(date.getDay()) !== -1) {
         highlightedDate.isHighlighted = true
+      }
+
+      if (highlightedDate.isHighlighted) {
+        highlightedDate.disabled = highlightDisabled
       }
 
       return highlightedDate
