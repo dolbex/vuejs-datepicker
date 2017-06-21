@@ -5,7 +5,7 @@
     <title>Vue.js Datepicker</title>
   </head>
   <body>
-    <datepicker :highlighted="[{days: [6,0], class:'red', disabled: true, message: 'It\'s Sunday or something'},{from: new Date(2017, 5, 26), to: new Date(2017, 5, 26), disabled:true, class:'blue'}]"></datepicker>
+    <datepicker :keys="[{class: 'red', 'label': 'Not Available'},{class: 'red', 'label': 'Not Available'},{class: 'red', 'label': 'Not Available'},{class: 'red', 'label': 'Not Available'}]" :highlighted="[{days: [6,0], class:'red', disabled: true, message: 'It\'s Sunday or something'},{from: new Date(2017, 5, 26), to: new Date(2017, 5, 26), disabled:true, class:'blue'}]"></datepicker>
     <script src="dist/build.js"></script>
   </body>
 </html>

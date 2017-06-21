@@ -79,6 +79,8 @@ Inline always open version
 | initial-view          | String       | 'day'       | If 'month' or 'year', open on that view  |
 | disabled-picker       | Boolean      | false       | If true, disable Datepicker on screen    |
 | required              | Boolean      | false       | Sets html required attribute on input    |
+| highlighted           | Object|Array |             | Highlights dates (see below)             |
+| keys                  | Array        |             | Creates a key below your calendar        |
 
 ## Events
 
@@ -187,6 +189,24 @@ var state = {
 <datepicker :highlighted="state.highlighted"></datepicker>
 ```
 
+#### Keys
+You can add a key to the bottom of the calendar so that the highlights can be better understood by your users. Just pass through the keys prop
+``` html
+<script>
+var state = {
+  keys: [
+    {
+      class: 'unavailable-date',
+      label: 'Unavailable Date'
+    },
+    {
+      class: 'available-date',
+      label: 'Available Date'
+    }
+  ]
+}
+</script>
+```
 
 #### Translations
 

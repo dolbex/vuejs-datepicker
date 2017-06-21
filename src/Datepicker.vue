@@ -37,6 +37,10 @@
                 track-by="timestamp"
                 v-bind:class="dayClasses(day)"
                 @click="selectDate(day)">{{ day.date }}<span class="tooltip">{{ day.highlightMessage }}</span></span>
+
+            <ul class="vdp-datepicker__keys" v-if="keys.length > 0">
+                <li v-for="key in keys" :class="key.class">{{ key.label }}</li>
+            </ul>
         </div>
 
         <!-- Month View -->
@@ -75,6 +79,8 @@
                 v-bind:class="{ 'selected': year.isSelected, 'disabled': year.isDisabled }"
                 @click.stop="selectYear(year)">{{ year.year }}</span>
         </div>
+
+
   </div>
 </template>
 
@@ -156,6 +162,9 @@ export default {
     required: {
       type: Boolean,
       default: false
+    },
+    keys: {
+      type: Array
     }
   },
   data () {
@@ -966,6 +975,20 @@ $width = 300px
     .month,
     .year
         width 33.333%
+
+    .vdp-datepicker__keys
+        padding-left:10px
+        padding-bottom:10px;
+
+        li
+            border-left:20px solid black
+            font-size:0.8em
+            height:20px
+            list-style-type:none
+            line-height:20px
+            float:left
+            padding:0 10px 10px 5px
+            margin-bottom:10px
 
 .vdp-datepicker__clear-button, .vdp-datepicker__calendar-button
     cursor pointer
