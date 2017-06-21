@@ -156,7 +156,8 @@ var state = {
             new Date(2016, 9, 18)
         ]
         class: 'unavailable-date',
-        disabled: true
+        disabled: true,
+        message: "Some tooltip message"
     }
 }
 </script>
@@ -177,7 +178,8 @@ var state = {
       {
         days: [5, 1], // Highlight Monday's and Fridays
         class: 'available-date',
-        disabled: false
+        disabled: false,
+        message: "Some tooltip message"
       }
     ]
 }

@@ -36,7 +36,7 @@
                 v-for="day in days"
                 track-by="timestamp"
                 v-bind:class="dayClasses(day)"
-                @click="selectDate(day)">{{ day.date }}</span>
+                @click="selectDate(day)">{{ day.date }}<span class="tooltip">{{ day.highlightMessage }}</span></span>
         </div>
 
         <!-- Month View -->
@@ -244,6 +244,7 @@ export default {
           isDisabled: (this.isDisabledDate(dObj) || highlightedDate.disabled),
           isHighlighted: highlightedDate.isHighlighted,
           highlightedClass: highlightedDate.highlightedClass,
+          highlightMessage: highlightedDate.message,
           isToday: dObj.toDateString() === (new Date()).toDateString()
         })
         dObj.setDate(dObj.getDate() + 1)
@@ -625,10 +626,9 @@ export default {
       let highlightedDate = {
         isHighlighted: false,
         highlightedClass: '',
-        disabled: false
+        disabled: false,
+        message: null
       }
-
-      console.log()
 
       if (!Array.isArray(this.highlighted)) {
         highlightedDate = this.checkHighlightedDate(this.highlighted, date)
@@ -650,6 +650,7 @@ export default {
     checkHighlightedDate (highlight, date) {
       var highlightClass = (typeof highlight.class !== 'undefined') ? highlight.class : ''
       var highlightDisabled = (typeof highlight.disabled !== 'undefined') ? highlight.disabled : false
+      var highlightMessage = (typeof highlight.message !== 'undefined') ? highlight.message : null
 
       let highlightedDate = {
         isHighlighted: false,
@@ -676,6 +677,10 @@ export default {
 
       if (highlightedDate.isHighlighted) {
         highlightedDate.disabled = highlightDisabled
+      }
+
+      if (highlightedDate.isHighlighted) {
+        highlightedDate.message = highlightMessage
       }
 
       return highlightedDate
@@ -901,6 +906,7 @@ $width = 300px
         cursor default
 
     .cell
+        position:relative
         display inline-block
         padding 0 5px
         width (100/7)%
@@ -936,6 +942,26 @@ $width = 300px
             cursor inherit
             &:hover
                 background inherit
+
+        .tooltip
+            position: absolute
+            bottom: 35px
+            width:150px;
+            background-color: black
+            padding: 0px 10px
+            font-size: 0.8em
+            border-radius: 3px
+            transform: translateX(-50%)
+            max-height:0
+            transition: opacity 1s, bottom 0.75s
+            overflow:hidden
+            opacity:0
+
+        &:hover
+            .tooltip
+                max-height:200px
+                opacity:1
+                bottom:40px
 
     .month,
     .year
